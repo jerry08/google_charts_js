@@ -190,7 +190,7 @@ var googlePkgLoaded = false;
             getSVG.setAttribute('xmlns', "http://www.w3.org/2000/svg"); // Add attr to svg
             getSVG.setAttribute('xmlns:svg', "http://www.w3.org/2000/svg"); // Add attr to svg
 
-            await drawInlineSVG2(ctx, getSVG.outerHTML).then(function (img) {
+            await drawInlineSVG(ctx, getSVG.outerHTML).then(function (img) {
                 var imgData = canvas.toDataURL('image/png');
                 var imgWidth = 190;
                 var imgHeight = canvas.height * imgWidth / canvas.width;
@@ -231,32 +231,7 @@ var googlePkgLoaded = false;
         DownloadPdf();
     });
 
-    function drawInlineSVG(ctx, rawSVG, callback) {
-
-        var svg = new Blob([rawSVG], { type: "image/svg+xml;charset=utf-8" }),
-            domURL = self.URL || self.webkitURL || self,
-            url = domURL.createObjectURL(svg),
-            img = new Image;
-
-        img.onload = function () {
-            ctx.drawImage(this, 0, 0);
-            domURL.revokeObjectURL(url);
-            callback(this);
-        };
-
-        img.src = url;
-    }
-
-    //Awaitable function
-    function blobToBase64(blob) {
-        return new Promise((resolve, _) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.readAsDataURL(blob);
-        });
-    }
-
-    function drawInlineSVG2(ctx, rawSVG) {
+    function drawInlineSVG(ctx, rawSVG) {
 
         var img = new Image();
 
