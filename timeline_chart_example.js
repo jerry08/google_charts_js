@@ -1,4 +1,7 @@
-var googlePkgLoaded = false;
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    var googlePkgLoaded = false;
 
     google.charts.load('current', { 'packages': ['timeline'] });
     google.charts.setOnLoadCallback(gLoaded);
@@ -86,13 +89,6 @@ var googlePkgLoaded = false;
     function typeOf(obj) {
         return {}.toString.call(obj).split(' ')[1].slice(0, -1).toLowerCase();
     }
-
-    //var groupBy = function (xs, key) {
-    //    return xs.reduce(function (rv, x) {
-    //        (rv[x[key]] = rv[x[key]] || []).push(x);
-    //        return rv;
-    //    }, {});
-    //};
 
     function groupBy(list, keyGetter) {
         const map = new Map();
@@ -238,14 +234,15 @@ var googlePkgLoaded = false;
         var svg = new Blob([rawSVG], { type: "image/svg+xml;charset=utf-8" });
         var domURL = self.URL || self.webkitURL || self;
         var url = domURL.createObjectURL(svg);
-        
+
         return new Promise((resolve, _) => {
             img.onload = function () {
                 ctx.drawImage(img, 0, 0);
                 domURL.revokeObjectURL(url);
                 resolve(img);
             };
-        
+
             img.src = url;
         });
     }
+</script>
